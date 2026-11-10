@@ -1,0 +1,13 @@
+# Paths are local to the application. User photos are never copied here.
+index_dir: "./data/index"
+database_path: "./data/metadata.db"
+
+model:
+  name: "buffalo_l"
+  providers:
+    - "CPUExecutionProvider"
+
+search:
+  top_k: 20
+  similarity_threshold: 0.45
+  ef_search: 64

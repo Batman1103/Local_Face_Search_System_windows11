@@ -1,0 +1,72 @@
+{
+  "name": "facesearch-desktop",
+  "version": "1.1.0",
+  "description": "Private local face search for personal photo collections",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:renderer": "npm --prefix ../frontend run build",
+    "dist": "npm run build:renderer && electron-builder --linux AppImage deb",
+    "dist:win": "npm run build:renderer && electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.facesearch.desktop",
+    "productName": "FaceSearch",
+    "files": [
+      "main.js",
+      "preload.js",
+      "assets/**"
+    ],
+    "extraResources": [
+      {
+        "from": "../backend",
+        "to": "backend"
+      },
+      {
+        "from": "../backend-dist",
+        "to": "backend-dist"
+      },
+      {
+        "from": "../frontend/dist",
+        "to": "frontend/dist"
+      }
+    ],
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Graphics;Photography;Utility",
+      "artifactName": "FaceSearch-${version}-${arch}.${ext}"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "FaceSearch-${version}-Setup.${ext}",
+      "icon": "assets/app.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.photography"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "FaceSearch"
+    }
+  }
+}
