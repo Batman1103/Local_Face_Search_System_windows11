@@ -1,0 +1,13 @@
+Python 3.11 (64-bit)
+Node.js LTS
+npm
+
+powershell -script:
+Set-ExecutionPolicy -Scope Process Bypass
+
+.\scripts\build-windows.ps1
+
+expected Output:
+desktop/
+  dist/
+    FaceSearch-1.1.0-Setup.exe
